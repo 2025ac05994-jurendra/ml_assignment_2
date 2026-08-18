@@ -1,0 +1,51 @@
+{
+  "dataset": "UCI Bank Marketing (bank-full.csv)",
+  "test_rows": 9043,
+  "positive_rate": 0.117,
+  "dropped_features": [
+    "duration"
+  ],
+  "random_state": 42,
+  "models": {
+    "Logistic Regression": {
+      "Accuracy": 0.7549,
+      "AUC": 0.7722,
+      "Precision": 0.2663,
+      "Recall": 0.6238,
+      "F1": 0.3733,
+      "MCC": 0.2855
+    },
+    "Decision Tree": {
+      "Accuracy": 0.8286,
+      "AUC": 0.7792,
+      "Precision": 0.3568,
+      "Recall": 0.5794,
+      "F1": 0.4416,
+      "MCC": 0.3613
+    },
+    "kNN": {
+      "Accuracy": 0.891,
+      "AUC": 0.7468,
+      "Precision": 0.6579,
+      "Recall": 0.1418,
+      "F1": 0.2333,
+      "MCC": 0.2706
+    },
+    "Naive Bayes": {
+      "Accuracy": 0.8495,
+      "AUC": 0.7491,
+      "Precision": 0.3775,
+      "Recall": 0.4414,
+      "F1": 0.407,
+      "MCC": 0.3227
+    },
+    "Random Forest": {
+      "Accuracy": 0.8494,
+      "AUC": 0.8054,
+      "Precision": 0.401,
+      "Recall": 0.5822,
+      "F1": 0.4749,
+      "MCC": 0.3997
+    }
+  }
+}

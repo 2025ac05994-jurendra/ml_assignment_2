@@ -1,0 +1,47 @@
+{
+  "target": "y",
+  "positive_label": "yes",
+  "numeric_features": [
+    "age",
+    "balance",
+    "day",
+    "campaign",
+    "pdays",
+    "previous"
+  ],
+  "categorical_features": [
+    "job",
+    "marital",
+    "education",
+    "default",
+    "housing",
+    "loan",
+    "contact",
+    "month",
+    "poutcome"
+  ],
+  "all_features": [
+    "age",
+    "job",
+    "marital",
+    "education",
+    "default",
+    "balance",
+    "housing",
+    "loan",
+    "contact",
+    "day",
+    "month",
+    "campaign",
+    "pdays",
+    "previous",
+    "poutcome"
+  ],
+  "files": {
+    "Logistic Regression": "logistic_regression",
+    "Decision Tree": "decision_tree",
+    "kNN": "knn",
+    "Naive Bayes": "naive_bayes",
+    "Random Forest": "random_forest"
+  }
+}
