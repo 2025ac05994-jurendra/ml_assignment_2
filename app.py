@@ -124,10 +124,20 @@ def prepare(frame):
     y = None
     if TARGET_COL in frame.columns:
         raw = frame.pop(TARGET_COL)
-        if raw.dtype == object:
-            y = (raw.astype(str).str.strip().str.lower() == POSITIVE_LABEL).astype(int)
+        if pd.api.types.is_numeric_dtype(raw):
+            y = (raw.fillna(0).astype(float) > 0).astype(int)
         else:
-            y = raw.astype(int)
+            text = raw.astype(str).str.strip().str.lower()
+            positive = {POSITIVE_LABEL, "1", "true", "t", "y"}
+            negative = {"no", "0", "false", "f", "n"}
+            unexpected = sorted(set(text) - positive - negative)
+            if unexpected:
+                raise ValueError(
+                    f"Could not read the `{TARGET_COL}` column. Unexpected value(s): "
+                    f"{', '.join(repr(v) for v in unexpected[:5])}. "
+                    f"Expected `{POSITIVE_LABEL}`/`no` or `1`/`0`."
+                )
+            y = text.isin(positive).astype(int)
     else:
         notes.append(
             f"No `{TARGET_COL}` column — predictions will be shown, but metrics "
@@ -252,7 +262,9 @@ try:
     X, y_true, notes = prepare(read_csv(payload))
 except ValueError as err:
     st.error(str(err))
-    st.info(f"Expected columns: `{'`, `'.join(REQUIRED_FEATURES)}` (plus optional `{TARGET_COL}`).")
+    if "missing required column" in str(err).lower():
+        st.info(f"Expected columns: `{'`, `'.join(REQUIRED_FEATURES)}` "
+                f"(plus optional `{TARGET_COL}`).")
     st.stop()
 except Exception as err:
     st.error(f"Could not read that file: {err}")

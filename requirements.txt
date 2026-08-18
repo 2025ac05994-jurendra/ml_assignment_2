@@ -1,7 +1,7 @@
 # Requirements.txt for ML Assignment
 scikit-learn==1.7.2
 streamlit>=1.50
-pandas>=2.0
+pandas>=2.2,<3.0
 numpy>=1.24
 matplotlib>=3.7
 seaborn>=0.13
